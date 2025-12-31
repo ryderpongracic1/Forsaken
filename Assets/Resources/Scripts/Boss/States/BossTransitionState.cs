@@ -5,6 +5,8 @@ public class BossTransitionState : State
     public BossTransitionState(BossStateMachine currentContext) : base(currentContext)
     {
         bossContext = currentContext;
+        isBaseState = true;
+        bossContext.IsHurt = false;
     }
     public override void EnterState()
     {   Debug.Log("transitioning");

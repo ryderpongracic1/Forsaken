@@ -23,7 +23,7 @@ public class BossStateMachine : StateMachine, IDamageable
     public int HurtFinished {get {return hurtFinished; } set {hurtFinished = value;}}
     public int IntroFinished {get {return introFinished; } set {introFinished = value;}}
     public int Health {get {return health;} set {health = value;}}
-    public int Damage {get {return damage;}}
+    public int Damage {get {return damage;} set {damage = value;}}
     public float Cooldown {get {return damageCooldown;} set {damageCooldown = value;}}
     public float TimeInIdle {get {return timeInIdle;}}
     public float TargetDistance {get {return targetDistance;}}
@@ -41,7 +41,7 @@ public class BossStateMachine : StateMachine, IDamageable
     {
         IsTransitioning = true;
         currentState = new BossTransitionState(this);
-        currentState.EnterState();
+        currentState.EnterStates();
     }
     protected override void FaceMovement()
     {
@@ -94,16 +94,9 @@ public class BossStateMachine : StateMachine, IDamageable
             //insert some way to transition here
             IsTransitioning = true;
             Health = 100;
-            damage *= 2;
+            Damage *= 2;
+            MoveSpeed *= 1.5f;
         }
-    }
-
-    void Transition()
-    {
-        Health = 100;
-        damage *= 2;
-        currentState = new BossTransitionState(this);
-        currentState.EnterState();
     }
 
 
